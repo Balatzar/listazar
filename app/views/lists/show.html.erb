@@ -1,13 +1,33 @@
-<%= turbo_frame_tag "list" do %>
-  <h1><%= @list.name %></h1>
+<div>
+  <%= turbo_stream_from @list %>
 
-  <%= link_to 'Edit', edit_list_path(@list) %> |
-  <%= link_to 'Back', lists_path, "data-turbo-frame": "_top" %>
-<% end %>
+  <%= turbo_frame_tag "list" do %>
+    <%= render @list %>
 
-<ul id="items">
-  <%= render @list.items %>
-</ul>
+    <%= link_to 'Edit', edit_list_path(@list) %> |
+    <%= link_to 'Back', lists_path, "data-turbo-frame": "_top" %>
 
-<%= link_to 'Ajouter élément', new_list_item_path(@list) %>
-<%= turbo_frame_tag "new_item", src: new_list_item_path(@list), target: "_top" %>
+    <div class="row flex-spaces child-borders">
+      <label class="paper-btn margin" for="modal-1">Options</label>
+    </div>
+    <input class="modal-state" id="modal-1" type="checkbox">
+    <div class="modal">
+      <label class="modal-bg" for="modal-1"></label>
+      <div class="modal-body">
+        <label class="btn-close" for="modal-1">X</label>
+        <h4 class="modal-title">Options</h4>
+        <p class="modal-text">
+          <button class="paper-btn" data-check-url="<%= uncheck_all_list_path(@list) %>" data-controller="list" data-action="click->list#checkall">Décocher tout</button>
+          <button class="paper-btn" data-check-url="<%= check_all_list_path(@list) %>" data-controller="list" data-action="click->list#checkall">Cocher tout</button>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+  <ul id="items">
+    <%= render @list.items %>
+  </ul>
+
+  <%= turbo_frame_tag "new_item", src: new_list_item_path(@list), target: "_top" %>
+
+</div>

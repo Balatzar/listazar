@@ -1,0 +1,4 @@
+<%= simple_form_for item, url: list_item_path(item.list, item) do |f| %>
+  <%= f.input :name, label: false %>
+  <%= f.button :submit, "Modifier" %>
+<% end %>

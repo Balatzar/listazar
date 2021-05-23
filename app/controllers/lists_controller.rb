@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[ show edit update destroy ]
+  before_action :set_list, only: %i[ show edit update destroy check_all uncheck_all ]
   before_action :authenticate_user!
 
   # GET /lists or /lists.json
@@ -45,6 +45,19 @@ class ListsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def check_all
+    # TODO: batch update and trigger stream update on list
+    @list.items.find_each do |item|
+      item.update!(done: true)
+    end
+  end
+
+  def uncheck_all
+    @list.items.find_each do |item|
+      item.update!(done: false)
     end
   end
 

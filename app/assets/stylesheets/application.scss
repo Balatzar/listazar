@@ -13,7 +13,31 @@
  *= require_self
  */
 
-turbo-frame {
-  display: block;
-  border: 1px solid blue;
+.center {
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.item {
+  input {
+    display: inline-block;
+  }
+  .name {
+    a {
+      background-image: none;
+    }
+    .three-dots {
+      display: inline-block;
+    }
+  }
+}
+
+.three-dots {
+  width: 20px;
+  height: 20px;
+  background-image: radial-gradient(circle, black 2px, transparent 1px);
+  background-size: 100% 33.33%;
 }

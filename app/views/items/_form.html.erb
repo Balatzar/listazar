@@ -1,4 +1,4 @@
 <%= simple_form_for item, url: list_items_path(params[:list_id]), data: { controller: "reset", action: "turbo:submit-end->reset#reset"} do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
+  <%= f.input :name, label: false %>
+  <%= f.button :submit, "Ajouter" %>
 <% end %>

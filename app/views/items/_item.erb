@@ -1,1 +1,13 @@
-<li><%= item.name %></li>
+<%= turbo_frame_tag dom_id(item) do %>
+  <li class="item">
+    <span>
+      <input type="checkbox" data-check-url="<%= check_list_item_path(item.list, item) %>" data-controller="list" data-action="click->list#check" <%= item.done ? "checked" : "" %> />
+      <span class="name">
+        <%= item.name %>
+        <%= link_to edit_list_item_path(item.list, item) do %>
+          <div class="three-dots"></div>
+        <% end %>
+      </span>
+    </span>
+  </li>
+<% end %>
