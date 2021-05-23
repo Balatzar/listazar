@@ -51,14 +51,16 @@ class ListsController < ApplicationController
   def check_all
     # TODO: batch update and trigger stream update on list
     @list.items.find_each do |item|
-      item.update!(done: true)
+      item.update!(done: true, done_at: DateTime.now)
     end
+    head :ok
   end
 
   def uncheck_all
     @list.items.find_each do |item|
       item.update!(done: false)
     end
+    head :ok
   end
 
   # DELETE /lists/1 or /lists/1.json

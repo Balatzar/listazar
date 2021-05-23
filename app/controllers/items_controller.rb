@@ -12,7 +12,11 @@ class ItemsController < ApplicationController
   end
 
   def check
-    @item.update!(done: !@item.done)
+    query = {
+      done: !@item.done
+    }
+    query[:done_at] = DateTime.now if !@item.done
+    @item.update!(query)
     head :ok
   end
 
