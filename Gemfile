@@ -7,6 +7,7 @@ gem "turbo-rails"
 gem "devise"
 gem "simple_form"
 gem "sidekiq"
+gem "sidekiq-cron", "~> 1.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'

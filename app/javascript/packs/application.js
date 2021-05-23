@@ -6,8 +6,6 @@
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 
-import "/node_modules/papercss/dist/paper.css";
-
 ActiveStorage.start();
 
-import "controllers"
+import "controllers";
