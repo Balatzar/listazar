@@ -22,13 +22,15 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @item = Item.new(item_params.merge(user_id: current_user.id))
+    @item = Item.new(item_params.merge(user_id: current_user.id, list_id: params[:list_id]))
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: "Item was successfully created." }
+        format.turbo_stream
+        format.html { redirect_to @item.list, notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
+        pp @item.errors
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @item.errors, status: :unprocessable_entity }
       end
@@ -65,6 +67,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:list_id, :name, :done, :reactivation_delay_days)
+      params.require(:item).permit(:name, :done, :reactivation_delay_days)
     end
 end
