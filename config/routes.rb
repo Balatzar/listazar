@@ -1,3 +1,6 @@
+require "sidekiq/web"
+require "sidekiq/cron/web"
+
 Rails.application.routes.draw do
   root to: "lists#index"
 
@@ -12,5 +15,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
   devise_for :users, controllers: { registrations: "registrations" }
+
+  mount Sidekiq::Web => "/sidekiq"
 end
