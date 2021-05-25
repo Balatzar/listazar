@@ -3,3 +3,4 @@
   <%= f.input :reactivation_delay_days, label: "Réactiver au bout de X jours" %>
   <%= f.button :submit, "Modifier" %>
 <% end %>
+<%= button_to 'Destroy', list_item_path(item.list, item), method: :delete, data: { confirm: 'Are you sure?' } %>
